@@ -4,6 +4,7 @@ import { useGLTF, OrbitControls } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 
 import islandScene from '../assets/3d/town.glb';
+import { Model } from '../models/Fish';
 
 const Island = ({
     isRotating,
@@ -177,6 +178,32 @@ const Island = ({
         <mesh ref={islandRef} {...props}>
             <primitive object={scene} />
             <OrbitControls ref={controlsRef} enableDamping={true} />
+            <Model
+                position={[0, 20, 10]}
+                rotation={[-Math.PI / 2, Math.PI / 4, 0]}
+            />
+            <Model position={[-8, 10, 20]} rotation={[0, -Math.PI, 0]} />
+            <Model
+                position={[-10, 10, 20]}
+                rotation={[Math.PI / 2, -Math.PI / 4, 0]}
+            />
+            <Model position={[5, 3, 20]} rotation={[0, -Math.PI / 4, 0]} />
+            <Model
+                position={[5, -10, 20]}
+                rotation={[Math.PI / 4, -Math.PI / 4, 0]}
+            />
+            <Model
+                position={[-1, -3, -15]}
+                rotation={[-Math.PI / 8, Math.PI / 4, 0]}
+            />
+            <Model position={[2, 16, -20]} rotation={[0, -Math.PI / 4, 0]} />
+            <Model position={[5, 25, -20]} rotation={[0, Math.PI, 0]} />
+            <Model
+                position={[7, -3, 15]}
+                rotation={[-Math.PI / 8, Math.PI / 4, 0]}
+            />
+            <Model position={[5, -12, -25]} rotation={[0, -Math.PI / 4, 0]} />
+            <Model position={[15, 2, -25]} rotation={[0, -Math.PI / 2, 0]} />
         </mesh>
     );
 };

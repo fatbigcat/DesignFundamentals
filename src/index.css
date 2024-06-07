@@ -217,6 +217,9 @@ body:has(.card[data-color='green']:hover) {
   left: 0;
   bottom: 0;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 
 @keyframes slideDown {
   0% {
