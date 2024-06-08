@@ -2,6 +2,11 @@ import * as THREE from 'three';
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useState, Suspense, useEffect, useRef } from 'react';
+import {
+    Selection,
+    EffectComposer,
+    Outline,
+} from '@react-three/postprocessing';
 import CustomLoader from '../components/CustomLoader';
 import Island from '../models/Island';
 import Sky from '../models/Sky';
@@ -75,14 +80,24 @@ const Home = () => {
                         intensity={1}
                     />
                     <Sky isRotating={isRotating} />
-                    <Island
-                        position={islandPosition}
-                        scale={islandScale}
-                        rotation={islandRotation}
-                        isRotating={isRotating}
-                        _setIsRotating={_setIsRotating}
-                        setCurrentStage={setCurrentStage}
-                    />
+                    <Selection>
+                        <EffectComposer multisampling={8} autoClear={false}>
+                            <Outline
+                                blur
+                                visibleEdgeColor="white"
+                                edgeStrength={10}
+                                width={1000}
+                            />
+                        </EffectComposer>
+                        <Island
+                            position={islandPosition}
+                            scale={islandScale}
+                            rotation={islandRotation}
+                            isRotating={isRotating}
+                            _setIsRotating={_setIsRotating}
+                            setCurrentStage={setCurrentStage}
+                        />
+                    </Selection>
                     {/* <Plane
                         isRotating={isRotating}
                         planeScale={planeScale}

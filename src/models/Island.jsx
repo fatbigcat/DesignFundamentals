@@ -2,6 +2,12 @@ import * as THREE from 'three';
 import React, { useRef, useEffect, useState } from 'react';
 import { useGLTF, OrbitControls } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
+import {
+    Selection,
+    Select,
+    EffectComposer,
+    Outline,
+} from '@react-three/postprocessing';
 
 import islandScene from '../assets/3d/town.glb';
 import { Model } from '../models/Fish';
@@ -40,13 +46,14 @@ const Island = ({
     ];
 
     const [rotationY, setRotationY] = useState(0);
-    const [shiny, setShiny] = useState(false);
+    const [hovered, setHovered] = useState(null);
     const lastX = useRef(0);
     const rotationSpeed = useRef(0);
     const dampingFactor = 0.95;
     const isDragging = useRef(false);
 
     const isRotatingRef = React.useRef(isRotating);
+
     function setIsRotating(value) {
         isRotatingRef.current = value;
         _setIsRotating(value);
@@ -59,7 +66,7 @@ const Island = ({
         }
     });
 
-    let pointer = false; //pointer state so that island doesn't start rotating on click
+    let pointer = false;
 
     const handlePointerDown = (e) => {
         e.preventDefault();
@@ -69,10 +76,8 @@ const Island = ({
         mouse.x = (e.clientX / gl.domElement.clientWidth) * 2 - 1;
         mouse.y = -(e.clientY / gl.domElement.clientHeight) * 2 + 1;
 
-        //update raycaster to reflect mouse position
         raycaster.setFromCamera(mouse, camera);
 
-        //objects intersecting ray
         const intersects = raycaster.intersectObjects(scene.children, true);
 
         if (intersects.length > 0) {
@@ -92,7 +97,6 @@ const Island = ({
     };
 
     const handlePointerUp = (e) => {
-        console.log('pointer up');
         e.stopPropagation();
         e.preventDefault();
         _setIsRotating(false);
@@ -101,6 +105,22 @@ const Island = ({
     };
 
     const handlePointerMove = (e) => {
+        mouse.x = (e.clientX / gl.domElement.clientWidth) * 2 - 1;
+        mouse.y = -(e.clientY / gl.domElement.clientHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+
+        const intersects = raycaster.intersectObjects(scene.children, true);
+        if (intersects.length > 0) {
+            const intersectedObject = intersects[0].object;
+            // console.log('Intersected object:', intersectedObject.name);
+            if (interactableMeshNames.includes(intersectedObject.name)) {
+                setHovered(intersectedObject);
+                console.log('Hovered:', intersectedObject.name);
+            } else {
+                setHovered(null);
+            }
+        }
         if (pointer) {
             _setIsRotating(true);
             e.stopPropagation();
@@ -114,7 +134,6 @@ const Island = ({
             }
 
             if (isRotating) {
-                console.log('rotating');
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const deltaX = (clientX - lastX.current) / viewport.width;
                 islandRef.current.rotation.y += deltaX * Math.PI * 0.009;
@@ -124,7 +143,6 @@ const Island = ({
         }
     };
 
-    //keyboard interractions
     const handleKeyDown = (e) => {
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
             const rotationDirection = e.key === 'ArrowLeft' ? 1 : -1;
@@ -135,11 +153,10 @@ const Island = ({
 
     const handleKeyUp = (e) => {
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-            setIsRotating(false); // Indicate rotation input has ended
+            setIsRotating(false);
         }
     };
 
-    // Animation frame loop
     useFrame(() => {
         if (islandRef.current) {
             islandRef.current.rotation.y += rotationSpeed.current;
@@ -175,36 +192,48 @@ const Island = ({
     }, [gl]);
 
     return (
-        <mesh ref={islandRef} {...props}>
-            <primitive object={scene} />
-            <OrbitControls ref={controlsRef} enableDamping={true} />
-            <Model
-                position={[0, 20, 10]}
-                rotation={[-Math.PI / 2, Math.PI / 4, 0]}
-            />
-            <Model position={[-8, 10, 20]} rotation={[0, -Math.PI, 0]} />
-            <Model
-                position={[-10, 10, 20]}
-                rotation={[Math.PI / 2, -Math.PI / 4, 0]}
-            />
-            <Model position={[5, 3, 20]} rotation={[0, -Math.PI / 4, 0]} />
-            <Model
-                position={[5, -10, 20]}
-                rotation={[Math.PI / 4, -Math.PI / 4, 0]}
-            />
-            <Model
-                position={[-1, -3, -15]}
-                rotation={[-Math.PI / 8, Math.PI / 4, 0]}
-            />
-            <Model position={[2, 16, -20]} rotation={[0, -Math.PI / 4, 0]} />
-            <Model position={[5, 25, -20]} rotation={[0, Math.PI, 0]} />
-            <Model
-                position={[7, -3, 15]}
-                rotation={[-Math.PI / 8, Math.PI / 4, 0]}
-            />
-            <Model position={[5, -12, -25]} rotation={[0, -Math.PI / 4, 0]} />
-            <Model position={[15, 2, -25]} rotation={[0, -Math.PI / 2, 0]} />
-        </mesh>
+        <Select enabled={hovered}>
+            <mesh ref={islandRef} {...props} onPointerOver={handlePointerMove}>
+                <primitive object={scene} />
+
+                <OrbitControls ref={controlsRef} enableDamping={true} />
+                <Model
+                    position={[0, 20, 10]}
+                    rotation={[-Math.PI / 2, Math.PI / 4, 0]}
+                />
+                <Model position={[-8, 10, 20]} rotation={[0, -Math.PI, 0]} />
+                <Model
+                    position={[-10, 10, 20]}
+                    rotation={[Math.PI / 2, -Math.PI / 4, 0]}
+                />
+                <Model position={[5, 3, 20]} rotation={[0, -Math.PI / 4, 0]} />
+                <Model
+                    position={[5, -10, 20]}
+                    rotation={[Math.PI / 4, -Math.PI / 4, 0]}
+                />
+                <Model
+                    position={[-1, -3, -15]}
+                    rotation={[-Math.PI / 8, Math.PI / 4, 0]}
+                />
+                <Model
+                    position={[2, 16, -20]}
+                    rotation={[0, -Math.PI / 4, 0]}
+                />
+                <Model position={[5, 25, -20]} rotation={[0, Math.PI, 0]} />
+                <Model
+                    position={[7, -3, 15]}
+                    rotation={[-Math.PI / 8, Math.PI / 4, 0]}
+                />
+                <Model
+                    position={[5, -12, -25]}
+                    rotation={[0, -Math.PI / 4, 0]}
+                />
+                <Model
+                    position={[15, 2, -25]}
+                    rotation={[0, -Math.PI / 2, 0]}
+                />
+            </mesh>
+        </Select>
     );
 };
 

@@ -33,7 +33,7 @@ export function Model({ initialRotation, ...props }) {
         const distance = fishRef.current.position.distanceTo(
             new THREE.Vector3(0, 0, 0)
         );
-        console.log('distance:', distance);
+        // console.log('distance:', distance);
         if (distance > maxDistance) {
             // const rot = fishRef.current.rotation;
             // // turn around
