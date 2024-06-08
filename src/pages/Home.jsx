@@ -80,6 +80,7 @@ const Home = () => {
                         intensity={1}
                     />
                     <Sky isRotating={isRotating} />
+
                     <Selection>
                         <EffectComposer multisampling={8} autoClear={false}>
                             <Outline

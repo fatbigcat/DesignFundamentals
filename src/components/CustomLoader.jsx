@@ -22,15 +22,7 @@ const CustomLoader = ({ onClick }) => {
                     style={{ background: 'none', border: 'none' }}
                 />
             )}
-            {clickCount === 1 && (
-                <img
-                    src="src/assets/images/mai-col/parchment.png"
-                    alt="Bottom Slide"
-                    className="slide-bottom"
-                    style={{ background: 'none', border: 'none' }}
-                />
-                <p>Click anywhere to begin</p>
-            )}
+            {clickCount === 1 && <div className="slide-bottom"></div>}
         </div>
     );
 };
