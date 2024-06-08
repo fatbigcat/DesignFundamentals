@@ -14,599 +14,697 @@ import {
     Select,
 } from '@react-three/postprocessing';
 import '../index.css';
+import Popup from '../components/Popup';
 
 export function Town(props) {
     const { nodes, materials } = useGLTF(islandScene);
     const [hovered, setHovered] = useState(null);
+    const [selectedItem, setSelectedItem] = useState({
+        name: null,
+        images: [],
+    }); //state that contains the name and path to images for the item
+
+    const imageUrls = {
+        bag_2: ['path/to/bag_image1.jpg', 'path/to/bag_image2.jpg'],
+        candles_2: ['path/to/candles_image1.jpg', 'path/to/candles_image2.jpg'],
+        ring_2: ['path/to/ring_image1.jpg', 'path/to/ring_image2.jpg'],
+        mushroom_2: [
+            'path/to/mushroom_image1.jpg',
+            'path/to/mushroom_image2.jpg',
+        ],
+        necklace_2: [
+            'path/to/necklace_image1.jpg',
+            'path/to/necklace_image2.jpg',
+        ],
+        lamp_2: ['path/to/lamp_image1.jpg', 'path/to/lamp_image2.jpg'],
+        potion_2: ['path/to/potion_image1.jpg', 'path/to/potion_image2.jpg'],
+        cup_2: ['path/to/cup_image1.jpg', 'path/to/cup_image2.jpg'],
+        gloves_2: ['path/to/gloves_image1.jpg', 'path/to/gloves_image2.jpg'],
+        knife_2: ['path/to/knife_image1.jpg', 'path/to/knife_image2.jpg'],
+        money_2: ['path/to/money_image1.jpg', 'path/to/money_image2.jpg'],
+        bottlegreen_2: [
+            'path/to/bottlegreen_image1.jpg',
+            'path/to/bottlegreen_image2.jpg',
+        ],
+        helmet_2: ['path/to/helmet_image1.jpg', 'path/to/helmet_image2.jpg'],
+        letter_2: ['path/to/letter_image1.jpg', 'path/to/letter_image2.jpg'],
+        shield_2: ['path/to/shield_image1.jpg', 'path/to/shield_image2.jpg'],
+        leftSidePapers: [
+            'src/assets/images/mai-col/thingslayingaround.png',
+            'src/assets/images/mai-col/tarot.png',
+        ],
+
+        bigPapers: [
+            'src/assets/images/sequence1/s1.png',
+            'src/assets/images/sequence1/s2.png',
+            'src/assets/images/sequence1/s3.png',
+            'src/assets/images/sequence1/s4.png',
+            'src/assets/images/sequence1/s5.png',
+            'src/assets/images/sequence1/s6.png',
+            'src/assets/images/sequence1/s7.png',
+            'src/assets/images/sequence1/s8.png',
+            'src/assets/images/sequence1/s9.png',
+            'src/assets/images/sequence1/s10.png',
+            'src/assets/images/sequence1/s11.png',
+            'src/assets/images/sequence1/s12.png',
+            'src/assets/images/sequence1/s13.png',
+            'src/assets/images/sequence1/s14.png',
+            'src/assets/images/sequence1/s15.png',
+            'src/assets/images/sequence1/s16.png',
+        ],
+        'Papers.001': [
+            'src/assets/images/sequence2/s1.png',
+            'src/assets/images/sequence2/s2.png',
+            'src/assets/images/sequence2/s3.png',
+            'src/assets/images/sequence2/s4.png',
+            'src/assets/images/sequence2/s5.png',
+            'src/assets/images/sequence2/s6.png',
+            'src/assets/images/sequence2/s7.png',
+            'src/assets/images/sequence2/s8.png',
+            'src/assets/images/sequence2/s9.png',
+            'src/assets/images/sequence2/s10.1.png',
+            'src/assets/images/sequence2/s10.2.png',
+        ],
+    };
 
     const click = (e, name) => {
         console.log('click', name);
+        setSelectedItem({ name, images: imageUrls[name] });
+    };
+    const closePopup = () => {
+        setSelectedItem({ name: null, images: [] });
     };
 
     return (
-        <Selection>
-            <EffectComposer multisampling={8} autoClear={false}>
-                <Outline
-                    blur
-                    visibleEdgeColor="white"
-                    edgeStrength={100}
-                    width={1000}
-                />
-            </EffectComposer>
-            <group {...props} dispose={null}>
-                <group
-                    position={[2.765, 2.539, -4.034]}
-                    rotation={[3.132, 0.897, -3.13]}
-                    scale={0.257}>
-                    <mesh
-                        geometry={nodes.bag_1.geometry}
-                        material={materials.lambert2}
+        <>
+            <Selection>
+                <EffectComposer multisampling={8} autoClear={false}>
+                    <Outline
+                        blur
+                        visibleEdgeColor="white"
+                        edgeStrength={100}
+                        width={1000}
                     />
-                    <Select enabled={hovered === 'bag_2'}>
+                </EffectComposer>
+                <group {...props} dispose={null}>
+                    <group
+                        position={[2.765, 2.539, -4.034]}
+                        rotation={[3.132, 0.897, -3.13]}
+                        scale={0.257}>
                         <mesh
-                            geometry={nodes.bag_2.geometry}
-                            material={materials.lambert6}
-                            onPointerOver={() => setHovered('bag_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'bag_2')}
+                            geometry={nodes.bag_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[-8.675, 0.768, -1.228]}
-                    rotation={[-Math.PI, -1.302, 3.008]}
-                    scale={0.189}>
-                    <mesh
-                        geometry={nodes.candles_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'candles_2'}>
+                        <Select enabled={hovered === 'bag_2'}>
+                            <mesh
+                                geometry={nodes.bag_2.geometry}
+                                material={materials.lambert6}
+                                onPointerOver={() => setHovered('bag_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'bag_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[-8.675, 0.768, -1.228]}
+                        rotation={[-Math.PI, -1.302, 3.008]}
+                        scale={0.189}>
                         <mesh
-                            geometry={nodes.candles_2.geometry}
-                            material={materials.lambert3}
-                            onPointerOver={() => setHovered('candles_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'candles_2')}
+                            geometry={nodes.candles_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[6.035, 16.836, -0.251]}
-                    rotation={[-0.124, 0.777, 2.68]}
-                    scale={0.292}>
-                    <mesh
-                        geometry={nodes.ring_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'ring_2'}>
+                        <Select enabled={hovered === 'candles_2'}>
+                            <mesh
+                                geometry={nodes.candles_2.geometry}
+                                material={materials.lambert3}
+                                onPointerOver={() => setHovered('candles_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'candles_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[6.035, 16.836, -0.251]}
+                        rotation={[-0.124, 0.777, 2.68]}
+                        scale={0.292}>
                         <mesh
-                            geometry={nodes.ring_2.geometry}
-                            material={materials.lambert6}
-                            onPointerOver={() => setHovered('ring_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'ring_2')}
+                            geometry={nodes.ring_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group position={[-4.477, 1.44, -7.334]} scale={0.179}>
-                    <mesh
-                        geometry={nodes.mushroom_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'mushroom_2'}>
+                        <Select enabled={hovered === 'ring_2'}>
+                            <mesh
+                                geometry={nodes.ring_2.geometry}
+                                material={materials.lambert6}
+                                onPointerOver={() => setHovered('ring_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'ring_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group position={[-4.477, 1.44, -7.334]} scale={0.179}>
                         <mesh
-                            geometry={nodes.mushroom_2.geometry}
-                            material={materials.lambert5}
-                            onPointerOver={() => setHovered('mushroom_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'mushroom_2')}
+                            geometry={nodes.mushroom_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[-5.505, 0.896, -5.503]}
-                    rotation={[3.115, -1.357, -3.076]}
-                    scale={[0.032, 0.13, 0.032]}>
-                    <mesh
-                        geometry={nodes.necklace_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'necklace_2'}>
+                        <Select enabled={hovered === 'mushroom_2'}>
+                            <mesh
+                                geometry={nodes.mushroom_2.geometry}
+                                material={materials.lambert5}
+                                onPointerOver={() => setHovered('mushroom_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'mushroom_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[-5.505, 0.896, -5.503]}
+                        rotation={[3.115, -1.357, -3.076]}
+                        scale={[0.032, 0.13, 0.032]}>
                         <mesh
-                            geometry={nodes.necklace_2.geometry}
-                            material={materials.lambert6}
-                            onPointerOver={() => setHovered('necklace_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'necklace_2')}
+                            geometry={nodes.necklace_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[-10.481, 2.936, 8.751]}
-                    rotation={[-0.029, -0.376, -0.06]}
-                    scale={0.465}>
-                    <mesh
-                        geometry={nodes.lamp_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'lamp_2'}>
+                        <Select enabled={hovered === 'necklace_2'}>
+                            <mesh
+                                geometry={nodes.necklace_2.geometry}
+                                material={materials.lambert6}
+                                onPointerOver={() => setHovered('necklace_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'necklace_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[-10.481, 2.936, 8.751]}
+                        rotation={[-0.029, -0.376, -0.06]}
+                        scale={0.465}>
                         <mesh
-                            geometry={nodes.lamp_2.geometry}
-                            material={materials.lambert6}
-                            onPointerOver={() => setHovered('lamp_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'lamp_2')}
+                            geometry={nodes.lamp_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[-1.259, 2.501, -5.627]}
-                    rotation={[-0.254, 0, -0.416]}
-                    scale={0.191}>
-                    <mesh
-                        geometry={nodes.potion_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'potion_2'}>
+                        <Select enabled={hovered === 'lamp_2'}>
+                            <mesh
+                                geometry={nodes.lamp_2.geometry}
+                                material={materials.lambert6}
+                                onPointerOver={() => setHovered('lamp_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'lamp_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[-1.259, 2.501, -5.627]}
+                        rotation={[-0.254, 0, -0.416]}
+                        scale={0.191}>
                         <mesh
-                            geometry={nodes.potion_2.geometry}
-                            material={materials.lambert5}
-                            onPointerOver={() => setHovered('potion_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'potion_2')}
+                            geometry={nodes.potion_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[0.103, 2.851, -12.839]}
-                    rotation={[0.366, -0.22, -0.295]}
-                    scale={0.266}>
-                    <mesh
-                        geometry={nodes.cup_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'cup_2'}>
+                        <Select enabled={hovered === 'potion_2'}>
+                            <mesh
+                                geometry={nodes.potion_2.geometry}
+                                material={materials.lambert5}
+                                onPointerOver={() => setHovered('potion_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'potion_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[0.103, 2.851, -12.839]}
+                        rotation={[0.366, -0.22, -0.295]}
+                        scale={0.266}>
                         <mesh
-                            geometry={nodes.cup_2.geometry}
-                            material={materials.lambert5}
-                            onPointerOver={() => setHovered('cup_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'cup_2')}
+                            geometry={nodes.cup_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[1.394, 4.464, 4.967]}
-                    rotation={[-2.878, 0.236, -3.077]}
-                    scale={0.175}>
-                    <mesh
-                        geometry={nodes.gloves_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'gloves_2'}>
+                        <Select enabled={hovered === 'cup_2'}>
+                            <mesh
+                                geometry={nodes.cup_2.geometry}
+                                material={materials.lambert5}
+                                onPointerOver={() => setHovered('cup_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'cup_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[1.394, 4.464, 4.967]}
+                        rotation={[-2.878, 0.236, -3.077]}
+                        scale={0.175}>
                         <mesh
-                            geometry={nodes.gloves_2.geometry}
-                            material={materials.lambert4}
-                            onPointerOver={() => setHovered('gloves_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'gloves_2')}
+                            geometry={nodes.gloves_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[3.288, 3.328, 2.035]}
-                    rotation={[Math.PI, -1.393, Math.PI]}
-                    scale={0.237}>
-                    <mesh
-                        geometry={nodes.knife_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'knife_2'}>
+                        <Select enabled={hovered === 'gloves_2'}>
+                            <mesh
+                                geometry={nodes.gloves_2.geometry}
+                                material={materials.lambert4}
+                                onPointerOver={() => setHovered('gloves_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'gloves_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[3.288, 3.328, 2.035]}
+                        rotation={[Math.PI, -1.393, Math.PI]}
+                        scale={0.237}>
                         <mesh
-                            geometry={nodes.knife_2.geometry}
-                            material={materials.lambert1}
-                            onPointerOver={() => setHovered('knife_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'knife_2')}
+                            geometry={nodes.knife_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[-5.575, 3.192, 11.782]}
-                    rotation={[-1.398, -0.312, -1.341]}
-                    scale={0.622}>
-                    <mesh
-                        geometry={nodes.money_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'money_2'}>
+                        <Select enabled={hovered === 'knife_2'}>
+                            <mesh
+                                geometry={nodes.knife_2.geometry}
+                                material={materials.lambert1}
+                                onPointerOver={() => setHovered('knife_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'knife_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[-5.575, 3.192, 11.782]}
+                        rotation={[-1.398, -0.312, -1.341]}
+                        scale={0.622}>
                         <mesh
-                            geometry={nodes.money_2.geometry}
-                            material={materials.lambert4}
-                            onPointerOver={() => setHovered('money_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'money_2')}
+                            geometry={nodes.money_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[0.672, 7.156, 6.985]}
-                    rotation={[-0.472, -0.43, -0.661]}
-                    scale={0.416}>
-                    <mesh
-                        geometry={nodes.bottlegreen_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'bottlegreen_2'}>
+                        <Select enabled={hovered === 'money_2'}>
+                            <mesh
+                                geometry={nodes.money_2.geometry}
+                                material={materials.lambert4}
+                                onPointerOver={() => setHovered('money_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'money_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[0.672, 7.156, 6.985]}
+                        rotation={[-0.472, -0.43, -0.661]}
+                        scale={0.416}>
                         <mesh
-                            geometry={nodes.bottlegreen_2.geometry}
-                            material={materials.lambert5}
-                            onPointerOver={() => setHovered('bottlegreen_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'bottlegreen_2')}
+                            geometry={nodes.bottlegreen_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
+                        <Select enabled={hovered === 'bottlegreen_2'}>
+                            <mesh
+                                geometry={nodes.bottlegreen_2.geometry}
+                                material={materials.lambert5}
+                                onPointerOver={() =>
+                                    setHovered('bottlegreen_2')
+                                }
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'bottlegreen_2')}
+                            />
+                        </Select>
+                    </group>
 
-                <group
-                    position={[4.426, 8.72, 9.257]}
-                    rotation={[-0.279, -1.122, -0.31]}
-                    scale={0.386}>
-                    <mesh
-                        geometry={nodes.helmet_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'helmet_2'}>
+                    <group
+                        position={[4.426, 8.72, 9.257]}
+                        rotation={[-0.279, -1.122, -0.31]}
+                        scale={0.386}>
                         <mesh
-                            geometry={nodes.helmet_2.geometry}
-                            material={materials.lambert1}
-                            onPointerOver={() => setHovered('helmet_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'helmet_2')}
+                            geometry={nodes.helmet_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[5.358, 3.416, -9.954]}
-                    rotation={[-2.786, -0.392, -2.824]}
-                    scale={[0.612, 0.432, 0.03]}>
-                    <mesh
-                        geometry={nodes.letter_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'letter_2'}>
+                        <Select enabled={hovered === 'helmet_2'}>
+                            <mesh
+                                geometry={nodes.helmet_2.geometry}
+                                material={materials.lambert1}
+                                onPointerOver={() => setHovered('helmet_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'helmet_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[5.358, 3.416, -9.954]}
+                        rotation={[-2.786, -0.392, -2.824]}
+                        scale={[0.612, 0.432, 0.03]}>
                         <mesh
-                            geometry={nodes.letter_2.geometry}
-                            material={materials.lambert6}
-                            onPointerOver={() => setHovered('letter_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'letter_2')}
+                            geometry={nodes.letter_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <group
-                    position={[9.142, 7.877, -4.505]}
-                    rotation={[0, 1.548, 0]}
-                    scale={[0.301, 0.327, 0.06]}>
-                    <mesh
-                        geometry={nodes.shield_1.geometry}
-                        material={materials.lambert2}
-                    />
-                    <Select enabled={hovered === 'shield_2'}>
+                        <Select enabled={hovered === 'letter_2'}>
+                            <mesh
+                                geometry={nodes.letter_2.geometry}
+                                material={materials.lambert6}
+                                onPointerOver={() => setHovered('letter_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'letter_2')}
+                            />
+                        </Select>
+                    </group>
+                    <group
+                        position={[9.142, 7.877, -4.505]}
+                        rotation={[0, 1.548, 0]}
+                        scale={[0.301, 0.327, 0.06]}>
                         <mesh
-                            geometry={nodes.shield_2.geometry}
-                            material={materials.lambert1}
-                            onPointerOver={() => setHovered('shield_2')}
-                            onPointerOut={() => setHovered(false)}
-                            onClick={(e) => click(e, 'shield_2')}
+                            geometry={nodes.shield_1.geometry}
+                            material={materials.lambert2}
                         />
-                    </Select>
-                </group>
-                <mesh
-                    geometry={nodes.stairs_2.geometry}
-                    material={materials.stairs}
-                    position={[-4.062, 4.053, 4.103]}
-                />
-                <mesh
-                    geometry={nodes.Stones.geometry}
-                    material={materials.bricks}
-                    position={[-4.398, -2.011, -5.404]}
-                    rotation={[-0.908, -0.507, -0.626]}
-                />
-                <group
-                    position={[2.484, 10.325, 0.105]}
-                    rotation={[0, -1.571, 0]}>
+                        <Select enabled={hovered === 'shield_2'}>
+                            <mesh
+                                geometry={nodes.shield_2.geometry}
+                                material={materials.lambert1}
+                                onPointerOver={() => setHovered('shield_2')}
+                                onPointerOut={() => setHovered(false)}
+                                onClick={(e) => click(e, 'shield_2')}
+                            />
+                        </Select>
+                    </group>
                     <mesh
-                        geometry={nodes.Cube096.geometry}
-                        material={materials.GLASS}
+                        geometry={nodes.stairs_2.geometry}
+                        material={materials.stairs}
+                        position={[-4.062, 4.053, 4.103]}
                     />
                     <mesh
-                        geometry={nodes.Cube096_1.geometry}
-                        material={materials['deco.001']}
-                    />
-                </group>
-                <Select enabled={hovered === 'leftSidePapers'}>
-                    <mesh
-                        geometry={nodes.leftSidePapers.geometry}
-                        material={materials.Papers_noname}
-                        position={[6.541, 4.632, -7.534]}
-                        rotation={[Math.PI / 2, 0, Math.PI / 2]}
-                        scale={[1.749, 1, 2.838]}
-                        onPointerOver={() => setHovered('leftSidePapers')}
-                        onPointerOut={() => setHovered(false)}
-                        onClick={(e) => click(e, 'leftSidePapers')}
-                    />
-                </Select>
-                <mesh
-                    geometry={nodes.Deco_wind.geometry}
-                    material={materials.deco}
-                    position={[1.793, 9.727, -2.116]}
-                    rotation={[0, 1.571, 0]}
-                />
-                <group position={[-3.377, 12.192, 0.249]}>
-                    <mesh
-                        geometry={nodes.Cube020.geometry}
-                        material={materials.kuk}
-                    />
-                    <mesh
-                        geometry={nodes.Cube020_1.geometry}
-                        material={materials.floor}
-                    />
-                </group>
-                <group position={[3.669, 20.292, -1.62]}>
-                    <mesh
-                        geometry={nodes.Cylinder006.geometry}
+                        geometry={nodes.Stones.geometry}
                         material={materials.bricks}
+                        position={[-4.398, -2.011, -5.404]}
+                        rotation={[-0.908, -0.507, -0.626]}
                     />
+                    <group
+                        position={[2.484, 10.325, 0.105]}
+                        rotation={[0, -1.571, 0]}>
+                        <mesh
+                            geometry={nodes.Cube096.geometry}
+                            material={materials.GLASS}
+                        />
+                        <mesh
+                            geometry={nodes.Cube096_1.geometry}
+                            material={materials['deco.001']}
+                        />
+                    </group>
+                    <Select enabled={hovered === 'leftSidePapers'}>
+                        <mesh
+                            geometry={nodes.leftSidePapers.geometry}
+                            material={materials.Papers_noname}
+                            position={[6.541, 4.632, -7.534]}
+                            rotation={[Math.PI / 2, 0, Math.PI / 2]}
+                            scale={[1.749, 1, 2.838]}
+                            onPointerOver={() => setHovered('leftSidePapers')}
+                            onPointerOut={() => setHovered(false)}
+                            onClick={(e) => click(e, 'leftSidePapers')}
+                        />
+                    </Select>
                     <mesh
-                        geometry={nodes.Cylinder006_1.geometry}
-                        material={materials['outline.001']}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.Pipes001.geometry}
-                    material={materials.Pipe}
-                    position={[2.61, 18.244, -1.944]}
-                />
-                <group position={[2.378, 4.207, -6.351]}>
-                    <mesh
-                        geometry={nodes.Cube001.geometry}
-                        material={materials.fence}
-                    />
-                    <mesh
-                        geometry={nodes.Cube001_1.geometry}
-                        material={materials.emis}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.Base001.geometry}
-                    material={materials.WALL_1}
-                    position={[-8.03, -0.284, 11.061]}
-                />
-                <mesh
-                    geometry={nodes.Base002.geometry}
-                    material={materials.FLOOR_2}
-                    position={[-2.658, 1.647, 9.363]}
-                />
-                <mesh
-                    geometry={nodes.Base003.geometry}
-                    material={materials.house_1}
-                    position={[5.413, 11.041, 10.967]}
-                />
-                <mesh
-                    geometry={nodes.Base004.geometry}
-                    material={materials.house_5}
-                    position={[6.378, 8.406, 0.561]}
-                />
-                <mesh
-                    geometry={nodes.Base005.geometry}
-                    material={materials.House_4}
-                    position={[6.441, 14.102, -5.336]}
-                />
-                <mesh
-                    geometry={nodes.Base006.geometry}
-                    material={materials.house_3}
-                    position={[-3.545, 6.941, -9.734]}
-                />
-                <mesh
-                    geometry={nodes.Base007.geometry}
-                    material={materials.house_2}
-                    position={[-4.838, 4.862, -1.245]}
-                />
-                <mesh
-                    geometry={nodes.Bridge001.geometry}
-                    material={materials['base.001']}
-                    position={[-0.323, 5.334, 0.99]}
-                />
-                <mesh
-                    geometry={nodes.Deco001.geometry}
-                    material={materials['floor.001']}
-                    position={[-7.003, 5.62, 9.982]}
-                />
-                <mesh
-                    geometry={nodes.Stones001.geometry}
-                    material={materials['bricks.001']}
-                    position={[3.113, 0.007, 12.95]}
-                    rotation={[-0.908, -0.507, -0.626]}
-                    scale={2.174}
-                />
-                <mesh
-                    geometry={nodes.Stones002.geometry}
-                    material={materials['bricks.001']}
-                    position={[-3.588, -1.122, -1.036]}
-                    rotation={[-0.908, -0.507, -0.626]}
-                />
-                <mesh
-                    geometry={nodes.ground001.geometry}
-                    material={materials.bricks_02}
-                    position={[5.494, 0.814, -12.228]}
-                />
-                <mesh
-                    geometry={nodes.Platform.geometry}
-                    material={materials['floor.002']}
-                    position={[1.059, 0.734, -4.407]}
-                    scale={1.781}
-                />
-                <mesh
-                    geometry={nodes.Frame001.geometry}
-                    material={materials.house_1}
-                    position={[9.964, 9.899, 10.674]}
-                />
-                <mesh
-                    geometry={nodes.Frame002.geometry}
-                    material={materials.House_4}
-                    position={[6.454, 13.86, -5.407]}
-                />
-                <mesh
-                    geometry={nodes.frame003.geometry}
-                    material={materials.house_5}
-                    position={[6.457, 9.415, 1.876]}
-                />
-                <mesh
-                    geometry={nodes.Frame004.geometry}
-                    material={materials.house_1}
-                    position={[3.155, 13.787, 11.908]}
-                />
-                <mesh
-                    geometry={nodes.Frame005.geometry}
-                    material={materials.house_2}
-                    position={[-3.875, 7.085, -1.593]}
-                />
-                <mesh
-                    geometry={nodes.Frame006.geometry}
-                    material={materials.house_3}
-                    position={[-2.281, 9.103, -9.677]}
-                />
-                <group
-                    position={[1.695, 5.011, -2.843]}
-                    rotation={[0, -1.571, 0]}>
-                    <mesh
-                        geometry={nodes.Cube021.geometry}
-                        material={materials.GLASS2}
-                    />
-                    <mesh
-                        geometry={nodes.Cube021_1.geometry}
-                        material={materials['deco.001']}
-                    />
-                    <mesh
-                        geometry={nodes.Cube021_2.geometry}
-                        material={materials.fence}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.Deco_wind001.geometry}
-                    material={materials.bricks}
-                    position={[2.62, 13.594, -3.205]}
-                    rotation={[0, 1.571, 0]}
-                />
-                <group position={[2.2, 16.913, -2.964]}>
-                    <mesh
-                        geometry={nodes.Cube023.geometry}
-                        material={materials.roof}
-                    />
-                    <mesh
-                        geometry={nodes.Cube023_1.geometry}
+                        geometry={nodes.Deco_wind.geometry}
                         material={materials.deco}
+                        position={[1.793, 9.727, -2.116]}
+                        rotation={[0, 1.571, 0]}
+                    />
+                    <group position={[-3.377, 12.192, 0.249]}>
+                        <mesh
+                            geometry={nodes.Cube020.geometry}
+                            material={materials.kuk}
+                        />
+                        <mesh
+                            geometry={nodes.Cube020_1.geometry}
+                            material={materials.floor}
+                        />
+                    </group>
+                    <group position={[3.669, 20.292, -1.62]}>
+                        <mesh
+                            geometry={nodes.Cylinder006.geometry}
+                            material={materials.bricks}
+                        />
+                        <mesh
+                            geometry={nodes.Cylinder006_1.geometry}
+                            material={materials['outline.001']}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.Pipes001.geometry}
+                        material={materials.Pipe}
+                        position={[2.61, 18.244, -1.944]}
+                    />
+                    <group position={[2.378, 4.207, -6.351]}>
+                        <mesh
+                            geometry={nodes.Cube001.geometry}
+                            material={materials.fence}
+                        />
+                        <mesh
+                            geometry={nodes.Cube001_1.geometry}
+                            material={materials.emis}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.Base001.geometry}
+                        material={materials.WALL_1}
+                        position={[-8.03, -0.284, 11.061]}
                     />
                     <mesh
-                        geometry={nodes.Cube023_2.geometry}
-                        material={materials['outline.001']}
+                        geometry={nodes.Base002.geometry}
+                        material={materials.FLOOR_2}
+                        position={[-2.658, 1.647, 9.363]}
                     />
-                </group>
-                <group position={[8.969, 4.449, 10.703]}>
                     <mesh
-                        geometry={nodes.Cube024.geometry}
+                        geometry={nodes.Base003.geometry}
+                        material={materials.house_1}
+                        position={[5.413, 11.041, 10.967]}
+                    />
+                    <mesh
+                        geometry={nodes.Base004.geometry}
+                        material={materials.house_5}
+                        position={[6.378, 8.406, 0.561]}
+                    />
+                    <mesh
+                        geometry={nodes.Base005.geometry}
+                        material={materials.House_4}
+                        position={[6.441, 14.102, -5.336]}
+                    />
+                    <mesh
+                        geometry={nodes.Base006.geometry}
+                        material={materials.house_3}
+                        position={[-3.545, 6.941, -9.734]}
+                    />
+                    <mesh
+                        geometry={nodes.Base007.geometry}
+                        material={materials.house_2}
+                        position={[-4.838, 4.862, -1.245]}
+                    />
+                    <mesh
+                        geometry={nodes.Bridge001.geometry}
+                        material={materials['base.001']}
+                        position={[-0.323, 5.334, 0.99]}
+                    />
+                    <mesh
+                        geometry={nodes.Deco001.geometry}
+                        material={materials['floor.001']}
+                        position={[-7.003, 5.62, 9.982]}
+                    />
+                    <mesh
+                        geometry={nodes.Stones001.geometry}
+                        material={materials['bricks.001']}
+                        position={[3.113, 0.007, 12.95]}
+                        rotation={[-0.908, -0.507, -0.626]}
+                        scale={2.174}
+                    />
+                    <mesh
+                        geometry={nodes.Stones002.geometry}
+                        material={materials['bricks.001']}
+                        position={[-3.588, -1.122, -1.036]}
+                        rotation={[-0.908, -0.507, -0.626]}
+                    />
+                    <mesh
+                        geometry={nodes.ground001.geometry}
+                        material={materials.bricks_02}
+                        position={[5.494, 0.814, -12.228]}
+                    />
+                    <mesh
+                        geometry={nodes.Platform.geometry}
+                        material={materials['floor.002']}
+                        position={[1.059, 0.734, -4.407]}
+                        scale={1.781}
+                    />
+                    <mesh
+                        geometry={nodes.Frame001.geometry}
+                        material={materials.house_1}
+                        position={[9.964, 9.899, 10.674]}
+                    />
+                    <mesh
+                        geometry={nodes.Frame002.geometry}
+                        material={materials.House_4}
+                        position={[6.454, 13.86, -5.407]}
+                    />
+                    <mesh
+                        geometry={nodes.frame003.geometry}
+                        material={materials.house_5}
+                        position={[6.457, 9.415, 1.876]}
+                    />
+                    <mesh
+                        geometry={nodes.Frame004.geometry}
+                        material={materials.house_1}
+                        position={[3.155, 13.787, 11.908]}
+                    />
+                    <mesh
+                        geometry={nodes.Frame005.geometry}
+                        material={materials.house_2}
+                        position={[-3.875, 7.085, -1.593]}
+                    />
+                    <mesh
+                        geometry={nodes.Frame006.geometry}
+                        material={materials.house_3}
+                        position={[-2.281, 9.103, -9.677]}
+                    />
+                    <group
+                        position={[1.695, 5.011, -2.843]}
+                        rotation={[0, -1.571, 0]}>
+                        <mesh
+                            geometry={nodes.Cube021.geometry}
+                            material={materials.GLASS2}
+                        />
+                        <mesh
+                            geometry={nodes.Cube021_1.geometry}
+                            material={materials['deco.001']}
+                        />
+                        <mesh
+                            geometry={nodes.Cube021_2.geometry}
+                            material={materials.fence}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.Deco_wind001.geometry}
                         material={materials.bricks}
+                        position={[2.62, 13.594, -3.205]}
+                        rotation={[0, 1.571, 0]}
                     />
+                    <group position={[2.2, 16.913, -2.964]}>
+                        <mesh
+                            geometry={nodes.Cube023.geometry}
+                            material={materials.roof}
+                        />
+                        <mesh
+                            geometry={nodes.Cube023_1.geometry}
+                            material={materials.deco}
+                        />
+                        <mesh
+                            geometry={nodes.Cube023_2.geometry}
+                            material={materials['outline.001']}
+                        />
+                    </group>
+                    <group position={[8.969, 4.449, 10.703]}>
+                        <mesh
+                            geometry={nodes.Cube024.geometry}
+                            material={materials.bricks}
+                        />
+                        <mesh
+                            geometry={nodes.Cube024_1.geometry}
+                            material={materials.floor}
+                        />
+                    </group>
+                    <Select enabled={hovered === 'Papers.001'}>
+                        <mesh
+                            geometry={nodes.Papers001.geometry}
+                            material={materials.papers_eye}
+                            position={[6.285, 7.002, 15.008]}
+                            rotation={[Math.PI / 2, 0, Math.PI / 2]}
+                            scale={[1.749, 1, 2.838]}
+                            onPointerOver={() => setHovered('Papers.001')}
+                            onPointerOut={() => setHovered(false)}
+                            onClick={(e) => click(e, 'Papers.001')}
+                        />
+                        <mesh
+                            geometry={nodes.Papers005.geometry}
+                            material={materials.Papers_who}
+                            position={[4.773, 5.387, 15.002]}
+                            rotation={[Math.PI / 2, 0, Math.PI / 2]}
+                            scale={[1.749, 1, 2.838]}
+                            onPointerOver={() => setHovered('Papers.001')}
+                            onPointerOut={() => setHovered(false)}
+                            onClick={(e) => click(e, 'Papers.001')}
+                        />
+                    </Select>
+                    <Select enabled={hovered === 'bridgePapers'}>
+                        <mesh
+                            geometry={nodes.bridgePapers.geometry}
+                            material={materials.papers_bridge}
+                            position={[0.409, 5.857, 6.244]}
+                            rotation={[Math.PI / 2, 0, Math.PI / 2]}
+                            scale={[1.749, 1, 2.838]}
+                            onPointerOver={() => setHovered('bridgePapers')}
+                            onPointerOut={() => setHovered(false)}
+                            onClick={(e) => click(e, 'bridgePapers')}
+                        />
+                    </Select>
                     <mesh
-                        geometry={nodes.Cube024_1.geometry}
-                        material={materials.floor}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.Papers001.geometry}
-                    material={materials.papers_eye}
-                    position={[6.285, 7.002, 15.008]}
-                    rotation={[Math.PI / 2, 0, Math.PI / 2]}
-                    scale={[1.749, 1, 2.838]}
-                />
-                <mesh
-                    geometry={nodes.bridgePapers.geometry}
-                    material={materials.papers_bridge}
-                    position={[0.409, 5.857, 6.244]}
-                    rotation={[Math.PI / 2, 0, Math.PI / 2]}
-                    scale={[1.749, 1, 2.838]}
-                />
-                <mesh
-                    geometry={nodes.indoorPapers.geometry}
-                    material={materials.papers_ton}
-                    position={[2.815, 8.934, 9.403]}
-                    rotation={[Math.PI / 2, 0, Math.PI / 2]}
-                    scale={[1.749, 1, 2.838]}
-                />
-                <mesh
-                    geometry={nodes.Papers004.geometry}
-                    material={materials.Papers_cat}
-                    position={[-3.153, 5.232, 12.38]}
-                    rotation={[Math.PI / 2, 0, Math.PI / 2]}
-                    scale={[1.749, 1, 2.838]}
-                />
-                <mesh
-                    geometry={nodes.Papers005.geometry}
-                    material={materials.Papers_who}
-                    position={[4.773, 5.387, 15.002]}
-                    rotation={[Math.PI / 2, 0, Math.PI / 2]}
-                    scale={[1.749, 1, 2.838]}
-                />
-                <Select enabled={hovered === 'bigPapers'}>
-                    <mesh
-                        geometry={nodes.bigPapers.geometry}
-                        material={materials.Papers_banner}
-                        position={[4.006, 9.942, -5.23]}
+                        geometry={nodes.indoorPapers.geometry}
+                        material={materials.papers_ton}
+                        position={[2.815, 8.934, 9.403]}
                         rotation={[Math.PI / 2, 0, Math.PI / 2]}
                         scale={[1.749, 1, 2.838]}
-                        onPointerOver={() => setHovered('bigPapers')}
-                        onPointerOut={() => setHovered(false)}
-                        onClick={(e) => click(e, 'bigPapers')}
                     />
-                </Select>
-                <Model
-                    position={[0, 20, 10]}
-                    rotation={[-Math.PI / 2, Math.PI / 4, 0]}
-                />
-                <Model position={[-8, 10, 20]} rotation={[0, -Math.PI, 0]} />
-                <Model
-                    position={[-10, 10, 20]}
-                    rotation={[Math.PI / 2, -Math.PI / 4, 0]}
-                />
-                <Model position={[5, 3, 20]} rotation={[0, -Math.PI / 4, 0]} />
-                <Model
-                    position={[5, -10, 20]}
-                    rotation={[Math.PI / 4, -Math.PI / 4, 0]}
-                />
-                <Model
-                    position={[-1, -3, -15]}
-                    rotation={[-Math.PI / 8, Math.PI / 4, 0]}
-                />
-                <Model
-                    position={[2, 16, -20]}
-                    rotation={[0, -Math.PI / 4, 0]}
-                />
-                <Model position={[5, 25, -20]} rotation={[0, Math.PI, 0]} />
-                <Model
-                    position={[7, -3, 15]}
-                    rotation={[-Math.PI / 8, Math.PI / 4, 0]}
-                />
-                <Model
-                    position={[5, -12, -25]}
-                    rotation={[0, -Math.PI / 4, 0]}
-                />
-                <Model
-                    position={[15, 2, -25]}
-                    rotation={[0, -Math.PI / 2, 0]}
-                />
-            </group>
-        </Selection>
+                    <mesh
+                        geometry={nodes.Papers004.geometry}
+                        material={materials.Papers_cat}
+                        position={[-3.153, 5.232, 12.38]}
+                        rotation={[Math.PI / 2, 0, Math.PI / 2]}
+                        scale={[1.749, 1, 2.838]}
+                    />
+                    <Select enabled={hovered === 'bigPapers'}>
+                        <mesh
+                            geometry={nodes.bigPapers.geometry}
+                            material={materials.Papers_banner}
+                            position={[4.006, 9.942, -5.23]}
+                            rotation={[Math.PI / 2, 0, Math.PI / 2]}
+                            scale={[1.749, 1, 2.838]}
+                            onPointerOver={() => setHovered('bigPapers')}
+                            onPointerOut={() => setHovered(false)}
+                            onClick={(e) => click(e, 'bigPapers')}
+                        />
+                    </Select>
+                    <Model
+                        position={[0, 20, 10]}
+                        rotation={[-Math.PI / 2, Math.PI / 4, 0]}
+                    />
+                    <Model
+                        position={[-8, 10, 20]}
+                        rotation={[0, -Math.PI, 0]}
+                    />
+                    <Model
+                        position={[-10, 10, 20]}
+                        rotation={[Math.PI / 2, -Math.PI / 4, 0]}
+                    />
+                    <Model
+                        position={[5, 3, 20]}
+                        rotation={[0, -Math.PI / 4, 0]}
+                    />
+                    <Model
+                        position={[5, -10, 20]}
+                        rotation={[Math.PI / 4, -Math.PI / 4, 0]}
+                    />
+                    <Model
+                        position={[-1, -3, -15]}
+                        rotation={[-Math.PI / 8, Math.PI / 4, 0]}
+                    />
+                    <Model
+                        position={[2, 16, -20]}
+                        rotation={[0, -Math.PI / 4, 0]}
+                    />
+                    <Model position={[5, 25, -20]} rotation={[0, Math.PI, 0]} />
+                    <Model
+                        position={[7, -3, 15]}
+                        rotation={[-Math.PI / 8, Math.PI / 4, 0]}
+                    />
+                    <Model
+                        position={[5, -12, -25]}
+                        rotation={[0, -Math.PI / 4, 0]}
+                    />
+                    <Model
+                        position={[15, 2, -25]}
+                        rotation={[0, -Math.PI / 2, 0]}
+                    />
+                </group>
+            </Selection>
+            {selectedItem.name && (
+                <Popup images={selectedItem.images} onClose={closePopup} />
+            )}
+        </>
     );
 }
 
