@@ -30,33 +30,26 @@ function Popup({ images, onClose }) {
             fullscreen
             // wrapperClass="underlay"
             style={{ background: 'rgba(0, 0, 0, 0.7)' }}
-            scaleFactor={80}
-            zIndexRange={[100, 0]}
-            onPointerOver={(e) => {
-                on;
-            }}>
+            scaleFactor={100}
+            zIndexRange={[100, 0]}>
             <div
-                className="popup"
+                className="underlay"
                 onClick={(e) => {
                     e.stopPropagation();
-                    handleClick();
-                }}
-                onPointerOver={(e) => {
-                    console.log('ppp');
-                }}
-                style={{
-                    width: `${2 * imageDimensions.width}px`,
-                    height: `${2 * imageDimensions.height}px`,
-                    backgroundImage: `url(${images[currentIndex]})`,
+                    onClose();
                 }}>
-                <div className="popup-content">
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            onClose();
-                        }}>
-                        🗙
-                    </button>
+                <div
+                    className="popup"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleClick();
+                    }}
+                    style={{
+                        width: `${imageDimensions.width}px`,
+                        height: `${imageDimensions.height}px`,
+                        backgroundImage: `url(${images[currentIndex]})`,
+                    }}>
+                    <div className="popup-content"></div>
                 </div>
             </div>
         </Html>
