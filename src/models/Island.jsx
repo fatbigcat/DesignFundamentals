@@ -42,10 +42,15 @@ export function Town(props) {
                         geometry={nodes.bag_1.geometry}
                         material={materials.lambert2}
                     />
-                    <mesh
-                        geometry={nodes.bag_2.geometry}
-                        material={materials.lambert6}
-                    />
+                    <Select enabled={hovered === 'bag_2'}>
+                        <mesh
+                            geometry={nodes.bag_2.geometry}
+                            material={materials.lambert6}
+                            onPointerOver={() => setHovered('bag_2')}
+                            onPointerOut={() => setHovered(false)}
+                            onClick={(e) => click(e, 'bag_2')}
+                        />
+                    </Select>
                 </group>
                 <group
                     position={[-8.675, 0.768, -1.228]}
@@ -214,10 +219,15 @@ export function Town(props) {
                         geometry={nodes.money_1.geometry}
                         material={materials.lambert2}
                     />
-                    <mesh
-                        geometry={nodes.money_2.geometry}
-                        material={materials.lambert4}
-                    />
+                    <Select enabled={hovered === 'money_2'}>
+                        <mesh
+                            geometry={nodes.money_2.geometry}
+                            material={materials.lambert4}
+                            onPointerOver={() => setHovered('money_2')}
+                            onPointerOut={() => setHovered(false)}
+                            onClick={(e) => click(e, 'money_2')}
+                        />
+                    </Select>
                 </group>
                 <group
                     position={[0.672, 7.156, 6.985]}
