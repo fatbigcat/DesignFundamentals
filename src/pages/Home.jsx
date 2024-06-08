@@ -1,32 +1,47 @@
-import * as THREE from 'three';
-import { OrbitControls } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { useState, Suspense, useEffect, useRef } from 'react';
-import {
-    Selection,
-    EffectComposer,
-    Outline,
-} from '@react-three/postprocessing';
-import CustomLoader from '../components/CustomLoader';
-import Island from '../models/Island';
 import Sky from '../models/Sky';
+import { Town } from '../models/Island';
+import CameraController from '../components/CameraControls';
+import { gsap } from 'gsap';
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+import CustomLoader from '../components/CustomLoader';
+import '../index.css';
+gsap.registerPlugin(MotionPathPlugin);
 
 const Home = () => {
     const [isRotating, _setIsRotating] = useState(false);
     const [currentStage, setCurrentStage] = useState(1);
     const [showLoader, setShowLoader] = useState(true);
-
-    const planeRef = useRef();
-
+    const cameraRef = useRef();
     const handleLoaderClick = () => {
         console.log('Loader clicked, hiding loader');
-        setShowLoader(false); // This will hide the loader when clicked
+        setShowLoader(false);
     };
+
+    if (!showLoader && cameraRef.current) {
+        gsap.to(cameraRef.current.position, {
+            //camera animations
+            duration: 3,
+            motionPath: {
+                path: [
+                    // { x: 30, y: 20, z: 30 }, // Top view
+                    { x: 0, y: 0, z: 35 }, // Final position facing the building
+                ],
+                curviness: 1.5,
+                autoRotate: true, //align camera with path
+                ease: 'power1.out',
+            },
+            onUpdate: () => {
+                cameraRef.current.lookAt(0, 0, 0); // Look at the center of the scene
+            },
+        });
+    }
 
     const adjustIslandForScreenSize = () => {
         let screenScale = null;
         let screenPosition = [-1, -7.5, 5];
-        let rotation = [0.1, -4.7, 0];
+        let rotation = [0, -4.7, 0];
         if (window.innerWidth < 768) {
             screenScale = [0.9, 0.9, 0.9];
         } else {
@@ -34,29 +49,26 @@ const Home = () => {
         }
         return [screenScale, screenPosition, rotation];
     };
-    const adjustPlaneForScreenSize = () => {
-        let screenScale, screenPosition;
 
-        if (window.innerWidth < 768) {
-            //resizing non functional
-            screenScale = [1.5, 1.5, 1.5];
-            screenPosition = [0, 2, 30];
-        } else {
-            screenScale = [3, 3, 10];
-            screenPosition = [0, 1, 30];
-        }
-        return [screenScale, screenPosition];
-    };
-    const [planeScale, planePosition] = adjustPlaneForScreenSize();
+    // const adjustFishForScreenSize = () => {
+    //     let screenScale, screenPosition;
+
+    //     if (window.innerWidth < 768) {
+    //         screenScale = [1.5, 1.5, 1.5];
+    //         screenPosition = [0, 2, 30];
+    //     } else {
+    //         screenScale = [3, 3, 10];
+    //         screenPosition = [0, 1, 30];
+    //     }
+    //     return [screenScale, screenPosition];
+    // };
+
+    // const [fishScale, fishPosition] = adjustFishForScreenSize();
     const [islandScale, islandPosition, islandRotation] =
         adjustIslandForScreenSize();
     useEffect(() => {
         console.log('Loader visibility changed:', showLoader);
-
-        if (planeRef.current) {
-            console.log('Plane Position:', planeRef.current.position);
-        }
-    }, [planePosition, showLoader]);
+    }, [showLoader]);
 
     return (
         <section className="w-full h-screen relative">
@@ -69,7 +81,15 @@ const Home = () => {
                 className={`w-full h-screen bg-transparent ${
                     isRotating ? 'cursor-grabbing' : 'cursor-grab'
                 }`}
-                camera={{ position: [0, 0, 35], near: 0.01, far: 1000 }}>
+                style={{
+                    cursor: 'url(src/assets/images/Hand-Reaching-Out3.png) 9 5, auto',
+                }}
+                camera={{ position: [30, 15, 30], near: 0.01, far: 1000 }}
+                onCreated={({ camera }) => {
+                    //you need to tell it what to put in the ref
+                    cameraRef.current = camera;
+                    camera.lookAt(0, 0, 0); //initial look at the center of the scene
+                }}>
                 <Suspense fallback={null}>
                     <directionalLight position={[10, 5, 10]} intensity={0.1} />
                     <ambientLight intensity={1.7} color="#fce1bb" />
@@ -80,43 +100,18 @@ const Home = () => {
                         intensity={1}
                     />
                     <Sky isRotating={isRotating} />
-
-                    <Selection>
-                        <EffectComposer multisampling={8} autoClear={false}>
-                            <Outline
-                                blur
-                                visibleEdgeColor="white"
-                                edgeStrength={10}
-                                width={1000}
-                            />
-                        </EffectComposer>
-                        <Island
-                            position={islandPosition}
-                            scale={islandScale}
-                            rotation={islandRotation}
-                            isRotating={isRotating}
-                            _setIsRotating={_setIsRotating}
-                            setCurrentStage={setCurrentStage}
-                        />
-                    </Selection>
-                    {/* <Plane
+                    <Town
+                        position={islandPosition}
+                        scale={islandScale}
+                        rotation={islandRotation}
                         isRotating={isRotating}
-                        planeScale={planeScale}
-                        planePosition={planePosition}
-                        rotation={[0, 20, 0]}
-            /> */}
-                    <OrbitControls
-                        enableZoom={true}
-                        maxPolarAngle={Math.PI / 2}
-                        minPolarAngle={Math.PI / 3}
-                        maxDistance={100}
-                        minDistance={0}
-                        zoomSpeed={1.2}
-                        enableDamping:true
+                        _setIsRotating={_setIsRotating}
+                        setCurrentStage={setCurrentStage}
                     />
+                    <CameraController />
                 </Suspense>
             </Canvas>
-            {!showLoader && <div>Home Page Content</div>}
+            {!showLoader}
         </section>
     );
 };
