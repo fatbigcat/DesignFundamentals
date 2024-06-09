@@ -23,10 +23,14 @@ export function Town(props) {
         name: null,
         images: [],
     }); //state that contains the name and path to images for the item
+    const [clickedMeshes, setClickedMeshes] = useState({});
 
     const imageUrls = {
-        bag_2: ['path/to/bag_image1.jpg', 'path/to/bag_image2.jpg'],
-        candles_2: ['path/to/candles_image1.jpg', 'path/to/candles_image2.jpg'],
+        bag_2: [
+            'src/assets/images/magicleylines.png',
+            'src/assets/images/magicleylines1.png',
+        ],
+        candles_2: ['src/assets/images/candless.png'],
         ring_2: ['path/to/ring_image1.jpg', 'path/to/ring_image2.jpg'],
         mushroom_2: [
             'path/to/mushroom_image1.jpg',
@@ -39,19 +43,28 @@ export function Town(props) {
         lamp_2: ['path/to/lamp_image1.jpg', 'path/to/lamp_image2.jpg'],
         potion_2: ['path/to/potion_image1.jpg', 'path/to/potion_image2.jpg'],
         cup_2: ['path/to/cup_image1.jpg', 'path/to/cup_image2.jpg'],
-        gloves_2: ['path/to/gloves_image1.jpg', 'path/to/gloves_image2.jpg'],
+        gloves_2: [
+            'src/assets/images/glovesp1.png',
+            'src/assets/images/glovesp2.png',
+            'src/assets/images/glovesp3.png',
+        ],
         knife_2: ['path/to/knife_image1.jpg', 'path/to/knife_image2.jpg'],
         money_2: ['path/to/money_image1.jpg', 'path/to/money_image2.jpg'],
         bottlegreen_2: [
-            'path/to/bottlegreen_image1.jpg',
-            'path/to/bottlegreen_image2.jpg',
+            'src/assets/images/bottlegreen1.png',
+            'src/assets/images/bottlegreen2.png',
+            'src/assets/images/bottlegreen3.png',
         ],
-        helmet_2: ['path/to/helmet_image1.jpg', 'path/to/helmet_image2.jpg'],
-        letter_2: ['path/to/letter_image1.jpg', 'path/to/letter_image2.jpg'],
+        helmet_2: ['src/assets/images/helmet.png'],
+        letter_2: ['src/assets/images/letter.png'],
         shield_2: ['path/to/shield_image1.jpg', 'path/to/shield_image2.jpg'],
         leftSidePapers: [
             'src/assets/images/mai-col/thingslayingaround.png',
             'src/assets/images/mai-col/tarot.png',
+        ],
+        bridgePapers: [
+            'path/to/helmet_image1.jpg',
+            'path/to/helmet_image2.jpg',
         ],
 
         bigPapers: [
@@ -86,10 +99,41 @@ export function Town(props) {
             'src/assets/images/sequence2/s10.2.png',
         ],
     };
+    useEffect(() => {
+        const allMeshes = [
+            'bag_2',
+            'candles_2',
+            'ring_2',
+            'mushroom_2',
+            'necklace_2',
+            'lamp_2',
+            'potion_2',
+            'cup_2',
+            'gloves_2',
+            'knife_2',
+            'money_2',
+            'bottlegreen_2',
+            'helmet_2',
+            'letter_2',
+            'shield_2',
+            'leftSidePapers',
+            'bigPapers',
+        ];
+
+        const allClicked = allMeshes.every((mesh) => clickedMeshes[mesh]);
+        if (allClicked) {
+            setAward(true);
+        }
+    }, [clickedMeshes]);
+    const prerequisites = {
+        gloves_2: 'necklace_2', // Example: 'bigPapers' can only be advanced if 'potion_2' has been clicked
+        // Add other prerequisites here as needed
+    };
 
     const click = (e, name) => {
         console.log('click', name);
         setSelectedItem({ name, images: imageUrls[name] });
+        setClickedMeshes((prev) => ({ ...prev, [name]: true }));
     };
     const closePopup = () => {
         setSelectedItem({ name: null, images: [] });
@@ -702,7 +746,13 @@ export function Town(props) {
                 </group>
             </Selection>
             {selectedItem.name && (
-                <Popup images={selectedItem.images} onClose={closePopup} />
+                <Popup
+                    images={selectedItem.images}
+                    onClose={closePopup}
+                    clickedMeshes={clickedMeshes}
+                    prerequisites={prerequisites}
+                    meshName={selectedItem.name}
+                />
             )}
         </>
     );

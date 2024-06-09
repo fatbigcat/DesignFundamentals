@@ -22,13 +22,13 @@ const Home = () => {
     if (!showLoader && cameraRef.current) {
         gsap.to(cameraRef.current.position, {
             //camera animations
-            duration: 3,
+            duration: 2,
             motionPath: {
                 path: [
                     // { x: 30, y: 20, z: 30 }, // Top view
                     { x: 0, y: 0, z: 35 }, // Final position facing the building
                 ],
-                curviness: 1.5,
+                curviness: 1.25,
                 autoRotate: true, //align camera with path
                 ease: 'power1.out',
             },

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Html } from '@react-three/drei';
 import '../index.css';
 
-function Popup({ images, onClose }) {
+function Popup({ images, onClose, clickedMeshes, prerequisites, meshName }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [imageDimensions, setImageDimensions] = useState({
         width: 0,
@@ -10,6 +10,12 @@ function Popup({ images, onClose }) {
     });
 
     const handleClick = () => {
+        const prerequisite = prerequisites[meshName];
+        if (currentIndex === 0) {
+            if (prerequisite && !clickedMeshes[prerequisite]) {
+                onClose();
+            }
+        }
         if (currentIndex < images.length - 1) {
             setCurrentIndex(currentIndex + 1);
         } else {
