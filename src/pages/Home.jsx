@@ -1,4 +1,4 @@
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { useState, Suspense, useEffect, useRef } from 'react';
 import Sky from '../models/Sky';
 import { Town } from '../models/Island';
@@ -6,6 +6,7 @@ import CameraController from '../components/CameraControls';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import CustomLoader from '../components/CustomLoader';
+import AudioPlayer from '../components/AudioPlayer';
 import '../index.css';
 gsap.registerPlugin(MotionPathPlugin);
 
@@ -72,6 +73,7 @@ const Home = () => {
 
     return (
         <section className="w-full h-screen relative">
+            <AudioPlayer />
             {showLoader && <CustomLoader onClick={handleLoaderClick} />}
             {/*<div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-center'>
                 POPUP
