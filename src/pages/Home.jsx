@@ -84,7 +84,7 @@ const Home = () => {
                     isRotating ? 'cursor-grabbing' : 'cursor-grab'
                 }`}
                 style={{
-                    cursor: 'url(src/assets/images/Hand-Reaching-Out3.png) 9 5, auto',
+                    cursor: 'url(src/assets/images/Hand-Reaching-Out3.png) 10 10, auto',
                 }}
                 camera={{ position: [30, 15, 30], near: 0.01, far: 1000 }}
                 onCreated={({ camera }) => {

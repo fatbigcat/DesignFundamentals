@@ -74,7 +74,7 @@ p {
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, #7f86ba, #f9afbc);
-  z-index: 999;
+  z-index: 9;
   padding: 0;
   margin: 0;
 }
@@ -194,7 +194,7 @@ p {
   padding: 10px; /* Padding for better visibility */
   padding-left: 13px;
   padding-right: 13px;
-  z-index: 999; /* Ensure it is on top of other elements */
+  z-index: 10;
   border-radius: 20px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
@@ -202,7 +202,6 @@ p {
 
 .audio-player button {
   background: none;
-  z-index: 999;
   border: none;
   cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
   font-size: 24px;
@@ -214,7 +213,6 @@ p {
   cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
 
   width: 100px;
-  z-index: 999;
   height: 6px;
   background: #ffffff;
   outline: none;
@@ -227,7 +225,6 @@ p {
   -webkit-appearance: none;
   appearance: none;
   width: 15px;
-  z-index: 999;
   height: 15px;
   border-radius: 50%;
   background: #625e93; /* Thumb color */
@@ -237,7 +234,6 @@ p {
 .audio-player input[type='range']::-moz-range-thumb {
   width: 15px;
   height: 15px;
-  z-index: 999;
   border-radius: 50%;
   background: #625e93; /* Thumb color */
   cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;

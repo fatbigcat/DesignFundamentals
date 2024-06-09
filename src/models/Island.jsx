@@ -223,7 +223,7 @@ export function Town(props) {
                     <group
                         position={[-5.505, 0.896, -5.503]}
                         rotation={[3.115, -1.357, -3.076]}
-                        scale={[0.032, 0.13, 0.032]}>
+                        scale={[0.04, 0.17, 0.04]}>
                         <mesh
                             geometry={nodes.necklace_1.geometry}
                             material={materials.lambert2}
