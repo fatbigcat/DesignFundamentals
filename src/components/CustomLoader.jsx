@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import '../index.css';
 
 const CustomLoader = ({ onClick }) => {
@@ -15,7 +16,9 @@ const CustomLoader = ({ onClick }) => {
     return (
         <div className="custom-loader" onClick={handleClick}>
             {clickCount === 0 && (
-                <img
+                <motion.img
+                    animate={{ x: 100 }}
+                    transition={{ delay: 1 }}
                     src="src/assets/images/mai-col/town_colorAdjusted.png"
                     alt="Top Slide"
                     className="slide-top"

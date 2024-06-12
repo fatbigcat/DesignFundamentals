@@ -23,6 +23,7 @@ export function Town(props) {
         name: null,
         images: [],
     }); //state that contains the name and path to images for the item
+    const [clickedCount, setClickedCount] = useState(0);
     const [clickedMeshes, setClickedMeshes] = useState({});
 
     const imageUrls = {
@@ -118,6 +119,8 @@ export function Town(props) {
             'shield_2',
             'leftSidePapers',
             'bigPapers',
+            'Papers.001',
+            'bridgePapers',
         ];
 
         const allClicked = allMeshes.every((mesh) => clickedMeshes[mesh]);

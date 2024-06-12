@@ -15,10 +15,40 @@ const Home = () => {
     const [currentStage, setCurrentStage] = useState(1);
     const [showLoader, setShowLoader] = useState(true);
     const cameraRef = useRef();
+    const audioPlayerRef = useRef();
+
     const handleLoaderClick = () => {
         console.log('Loader clicked, hiding loader');
         setShowLoader(false);
     };
+
+    const handleUserInteraction = () => {
+        if (audioPlayerRef.current) {
+            audioPlayerRef.current.playAudio();
+        }
+        document.removeEventListener('click', handleUserInteraction);
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleUserInteraction);
+        return () => {
+            document.removeEventListener('click', handleUserInteraction);
+        };
+    }, []);
+
+    const incrementClickedCount = (meshName) => {
+        setClickedMeshes((prev) => {
+            if (!prev[meshName]) {
+                return { ...prev, [meshName]: true };
+            }
+            return prev;
+        });
+    };
+
+    useEffect(() => {
+        const clickedMeshesArray = Object.keys(clickedMeshes);
+        setClickedCount(clickedMeshesArray.length);
+    }, [clickedMeshes]);
 
     if (!showLoader && cameraRef.current) {
         gsap.to(cameraRef.current.position, {
@@ -73,7 +103,7 @@ const Home = () => {
 
     return (
         <section className="w-full h-screen relative">
-            <AudioPlayer />
+            <AudioPlayer ref={audioPlayerRef} />
             {showLoader && <CustomLoader onClick={handleLoaderClick} />}
             {/*<div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-center'>
                 POPUP
@@ -109,6 +139,7 @@ const Home = () => {
                         isRotating={isRotating}
                         _setIsRotating={_setIsRotating}
                         setCurrentStage={setCurrentStage}
+                        incrementClickedCount={incrementClickedCount}
                     />
                     <CameraController />
                 </Suspense>
