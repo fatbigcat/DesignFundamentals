@@ -52,7 +52,7 @@ p {
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, #7f86ba, #f9afbc);
-  z-index: 1000;
+  z-index: 10000;
   padding: 0; /* Ensure no padding */
   margin: 0; /* Ensure no margin */
 }
@@ -74,7 +74,7 @@ p {
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, #7f86ba, #f9afbc);
-  z-index: 9;
+  z-index: 10000;
   padding: 0;
   margin: 0;
 }
@@ -89,36 +89,31 @@ p {
   text-align: center;
 }
 
-.slide-top {
-  max-height: 90vh;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%) translateY(-100%);
-  transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
-}
-.slide-top.slide-in {
-  transform: translateX(-50%) translateY(0);
+.custom-loader ~ .audio-player {
+  display: none !important;
 }
 
-.slide-bottom {
-  width: 85%;
-  height: 85%;
-  max-width: 80vw;
-  position: absolute;
+.slide-top, .slide-bottom {
+  max-width: 90vw;
+  max-height: 90vh;
+  left: 50%;
+  top: 50%;
+  position: fixed;
+  display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('/assets/images/mai-col/parchment.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%) translateY(100%);
-  transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 10001;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.slide-top.slide-in {
+  transform: translate(-50%, -50%) translateY(100px);
+  opacity: 1;
 }
 .slide-bottom.slide-in {
-  transform: translateX(-50%) translateY(0);
+  transform: translate(-50%, -50%) translateY(-100px);
+  opacity: 1;
 }
 
 .text-inside {
@@ -249,4 +244,16 @@ p {
   border-radius: 50%;
   background: #625e93; /* Thumb color */
   cursor: url('/assets/images/Hand-Reaching-Out3.png'), auto;
+}
+
+.loader-image {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  max-width: 90vw;
+  max-height: 90vh;
+  transform: translate(-50%, -50%);
+  z-index: 10001;
+  opacity: 1;
+  display: block;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import '../index.css';
 
 const CustomLoader = ({ onClick }) => {
@@ -16,17 +15,20 @@ const CustomLoader = ({ onClick }) => {
     return (
         <div className="custom-loader" onClick={handleClick}>
             {clickCount === 0 && (
-                <motion.img
-                    animate={{ x: 100 }}
-                    transition={{ delay: 1 }}
+                <img
                     src="/assets/images/mai-col/town_colorAdjusted.png"
                     alt="Top Slide"
-                    className={"slide-top" + (clickCount === 0 ? " slide-in" : "")}
+                    className="loader-image"
                     style={{ background: 'none', border: 'none' }}
                 />
             )}
             {clickCount === 1 && (
-                <div className="slide-bottom slide-in"></div>
+                <img
+                    src="/assets/images/mai-col/parchment.png"
+                    alt="Bottom Slide"
+                    className="loader-image"
+                    style={{ background: 'none', border: 'none' }}
+                />
             )}
         </div>
     );
