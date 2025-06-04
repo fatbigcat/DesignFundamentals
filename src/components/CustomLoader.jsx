@@ -21,11 +21,13 @@ const CustomLoader = ({ onClick }) => {
                     transition={{ delay: 1 }}
                     src="/assets/images/mai-col/town_colorAdjusted.png"
                     alt="Top Slide"
-                    className="slide-top"
+                    className={"slide-top" + (clickCount === 0 ? " slide-in" : "")}
                     style={{ background: 'none', border: 'none' }}
                 />
             )}
-            {clickCount === 1 && <div className="slide-bottom"></div>}
+            {clickCount === 1 && (
+                <div className="slide-bottom slide-in"></div>
+            )}
         </div>
     );
 };

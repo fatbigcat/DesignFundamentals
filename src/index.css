@@ -92,13 +92,18 @@ p {
 .slide-top {
   max-height: 90vh;
   position: absolute;
-  background: none;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) translateY(-100%);
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.slide-top.slide-in {
+  transform: translateX(-50%) translateY(0);
 }
 
 .slide-bottom {
-  margin-top: 0;
-  width: 85%; /* Adjust based on your image size */
-  height: 85%; /* Adjust based on your image size */
+  width: 85%;
+  height: 85%;
   max-width: 80vw;
   position: absolute;
   justify-content: center;
@@ -107,6 +112,13 @@ p {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) translateY(100%);
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.slide-bottom.slide-in {
+  transform: translateX(-50%) translateY(0);
 }
 
 .text-inside {
