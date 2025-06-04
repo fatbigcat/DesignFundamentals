@@ -3,14 +3,14 @@
 @tailwind utilities;
 @font-face {
   font-family: 'Otto';
-  src: url('./assets/otto/Otto.ttf') format('truetype'); /* Adjust the path and format as necessary */
+  src: url('/assets/otto/Otto.ttf') format('truetype'); /* Adjust the path and format as necessary */
   font-weight: normal;
   font-style: normal;
 }
 
 body {
   font-family: 'Otto', cursive;
-  cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
+  cursor: url('/assets/images/Hand-Reaching-Out3.png'), auto;
 }
 :root {
   --blue-rgb: 237 245 255;
@@ -103,7 +103,7 @@ p {
   position: absolute;
   justify-content: center;
   align-items: center;
-  background-image: url('src/assets/images/mai-col/parchment.png');
+  background-image: url('/assets/images/mai-col/parchment.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -176,7 +176,7 @@ p {
 
 .popup-content button:hover {
   background: rgba(0, 0, 0, 0.7);
-  cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
+  cursor: url('/assets/images/Hand-Reaching-Out3.png'), auto;
 }
 
 .audio-player {
@@ -197,20 +197,20 @@ p {
   z-index: 10;
   border-radius: 20px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
+  cursor: url('/assets/images/Hand-Reaching-Out3.png'), auto;
 }
 
 .audio-player button {
   background: none;
   border: none;
-  cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
+  cursor: url('/assets/images/Hand-Reaching-Out3.png'), auto;
   font-size: 24px;
   color: #ffffff;
 }
 
 .audio-player input[type='range'] {
   -webkit-appearance: none;
-  cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
+  cursor: url('/assets/images/Hand-Reaching-Out3.png'), auto;
 
   width: 100px;
   height: 6px;
@@ -228,7 +228,7 @@ p {
   height: 15px;
   border-radius: 50%;
   background: #625e93; /* Thumb color */
-  cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
+  cursor: url('/assets/images/Hand-Reaching-Out3.png'), auto;
 }
 
 .audio-player input[type='range']::-moz-range-thumb {
@@ -236,5 +236,5 @@ p {
   height: 15px;
   border-radius: 50%;
   background: #625e93; /* Thumb color */
-  cursor: url('src/assets/images/Hand-Reaching-Out3.png'), auto;
+  cursor: url('/assets/images/Hand-Reaching-Out3.png'), auto;
 }

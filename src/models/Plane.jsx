@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useAnimations, useGLTF } from '@react-three/drei';
-import planeScene from '../assets/3d/plane1.glb';
+import planeScene from '/assets/3d/plane1.glb';
 import { a } from '@react-spring/three';
 
 const Plane = ({ isRotating, planePosition, ...props }) => {

@@ -16,6 +16,7 @@ const Home = () => {
     const [showLoader, setShowLoader] = useState(true);
     const cameraRef = useRef();
     const audioPlayerRef = useRef();
+    //const [clickedMeshes, setClickedMeshes] = useState({});
 
     const handleLoaderClick = () => {
         console.log('Loader clicked, hiding loader');
@@ -44,11 +45,6 @@ const Home = () => {
             return prev;
         });
     };
-
-    useEffect(() => {
-        const clickedMeshesArray = Object.keys(clickedMeshes);
-        setClickedCount(clickedMeshesArray.length);
-    }, [clickedMeshes]);
 
     if (!showLoader && cameraRef.current) {
         gsap.to(cameraRef.current.position, {
@@ -114,7 +110,7 @@ const Home = () => {
                     isRotating ? 'cursor-grabbing' : 'cursor-grab'
                 }`}
                 style={{
-                    cursor: 'url(src/assets/images/Hand-Reaching-Out3.png) 10 10, auto',
+                    cursor: 'url(/assets/images/Hand-Reaching-Out3.png) 10 10, auto',
                 }}
                 camera={{ position: [30, 15, 30], near: 0.01, far: 1000 }}
                 onCreated={({ camera }) => {

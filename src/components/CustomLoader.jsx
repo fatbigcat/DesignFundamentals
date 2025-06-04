@@ -19,7 +19,7 @@ const CustomLoader = ({ onClick }) => {
                 <motion.img
                     animate={{ x: 100 }}
                     transition={{ delay: 1 }}
-                    src="src/assets/images/mai-col/town_colorAdjusted.png"
+                    src="/assets/images/mai-col/town_colorAdjusted.png"
                     alt="Top Slide"
                     className="slide-top"
                     style={{ background: 'none', border: 'none' }}

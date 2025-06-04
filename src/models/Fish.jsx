@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.2.18 fish.glb -o /home/ziga/misc/DesignFundamentals/src/m
 
 import * as THREE from 'three';
 import React, { useRef, useEffect } from 'react';
-import fishScene from '../assets/3d/fish.glb';
+import fishScene from '/assets/3d/fish.glb';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js';
 import { useGraph, useFrame } from '@react-three/fiber';

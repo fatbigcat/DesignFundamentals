@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.2.18 town.glb
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
-import islandScene from '../assets/3d/town.glb';
+import islandScene from '/assets/3d/town.glb';
 import { Model } from '../models/Fish';
 import {
     Selection,
@@ -28,10 +28,10 @@ export function Town(props) {
 
     const imageUrls = {
         bag_2: [
-            'src/assets/images/magicleylines.png',
-            'src/assets/images/magicleylines1.png',
+            '/assets/images/magicleylines.png',
+            '/assets/images/magicleylines1.png',
         ],
-        candles_2: ['src/assets/images/candless.png'],
+        candles_2: ['/assets/images/candless.png'],
         ring_2: ['path/to/ring_image1.jpg', 'path/to/ring_image2.jpg'],
         mushroom_2: [
             'path/to/mushroom_image1.jpg',
@@ -45,23 +45,23 @@ export function Town(props) {
         potion_2: ['path/to/potion_image1.jpg', 'path/to/potion_image2.jpg'],
         cup_2: ['path/to/cup_image1.jpg', 'path/to/cup_image2.jpg'],
         gloves_2: [
-            'src/assets/images/glovesp1.png',
-            'src/assets/images/glovesp2.png',
-            'src/assets/images/glovesp3.png',
+            '/assets/images/glovesp1.png',
+            '/assets/images/glovesp2.png',
+            '/assets/images/glovesp3.png',
         ],
         knife_2: ['path/to/knife_image1.jpg', 'path/to/knife_image2.jpg'],
         money_2: ['path/to/money_image1.jpg', 'path/to/money_image2.jpg'],
         bottlegreen_2: [
-            'src/assets/images/bottlegreen1.png',
-            'src/assets/images/bottlegreen2.png',
-            'src/assets/images/bottlegreen3.png',
+            '/assets/images/bottlegreen1.png',
+            '/assets/images/bottlegreen2.png',
+            '/assets/images/bottlegreen3.png',
         ],
-        helmet_2: ['src/assets/images/helmet.png'],
-        letter_2: ['src/assets/images/letter.png'],
+        helmet_2: ['/assets/images/helmet.png'],
+        letter_2: ['/assets/images/letter.png'],
         shield_2: ['path/to/shield_image1.jpg', 'path/to/shield_image2.jpg'],
         leftSidePapers: [
-            'src/assets/images/mai-col/thingslayingaround.png',
-            'src/assets/images/mai-col/tarot.png',
+            '/assets/images/mai-col/thingslayingaround.png',
+            '/assets/images/mai-col/tarot.png',
         ],
         bridgePapers: [
             'path/to/helmet_image1.jpg',
@@ -69,35 +69,35 @@ export function Town(props) {
         ],
 
         bigPapers: [
-            'src/assets/images/sequence1/s1.png',
-            'src/assets/images/sequence1/s2.png',
-            'src/assets/images/sequence1/s3.png',
-            'src/assets/images/sequence1/s4.png',
-            'src/assets/images/sequence1/s5.png',
-            'src/assets/images/sequence1/s6.png',
-            'src/assets/images/sequence1/s7.png',
-            'src/assets/images/sequence1/s8.png',
-            'src/assets/images/sequence1/s9.png',
-            'src/assets/images/sequence1/s10.png',
-            'src/assets/images/sequence1/s11.png',
-            'src/assets/images/sequence1/s12.png',
-            'src/assets/images/sequence1/s13.png',
-            'src/assets/images/sequence1/s14.png',
-            'src/assets/images/sequence1/s15.png',
-            'src/assets/images/sequence1/s16.png',
+            '/assets/images/sequence1/s1.png',
+            '/assets/images/sequence1/s2.png',
+            '/assets/images/sequence1/s3.png',
+            '/assets/images/sequence1/s4.png',
+            '/assets/images/sequence1/s5.png',
+            '/assets/images/sequence1/s6.png',
+            '/assets/images/sequence1/s7.png',
+            '/assets/images/sequence1/s8.png',
+            '/assets/images/sequence1/s9.png',
+            '/assets/images/sequence1/s10.png',
+            '/assets/images/sequence1/s11.png',
+            '/assets/images/sequence1/s12.png',
+            '/assets/images/sequence1/s13.png',
+            '/assets/images/sequence1/s14.png',
+            '/assets/images/sequence1/s15.png',
+            '/assets/images/sequence1/s16.png',
         ],
         'Papers.001': [
-            'src/assets/images/sequence2/s1.png',
-            'src/assets/images/sequence2/s2.png',
-            'src/assets/images/sequence2/s3.png',
-            'src/assets/images/sequence2/s4.png',
-            'src/assets/images/sequence2/s5.png',
-            'src/assets/images/sequence2/s6.png',
-            'src/assets/images/sequence2/s7.png',
-            'src/assets/images/sequence2/s8.png',
-            'src/assets/images/sequence2/s9.png',
-            'src/assets/images/sequence2/s10.1.png',
-            'src/assets/images/sequence2/s10.2.png',
+            '/assets/images/sequence2/s1.png',
+            '/assets/images/sequence2/s2.png',
+            '/assets/images/sequence2/s3.png',
+            '/assets/images/sequence2/s4.png',
+            '/assets/images/sequence2/s5.png',
+            '/assets/images/sequence2/s6.png',
+            '/assets/images/sequence2/s7.png',
+            '/assets/images/sequence2/s8.png',
+            '/assets/images/sequence2/s9.png',
+            '/assets/images/sequence2/s10.1.png',
+            '/assets/images/sequence2/s10.2.png',
         ],
     };
     useEffect(() => {
@@ -761,4 +761,4 @@ export function Town(props) {
     );
 }
 
-useGLTF.preload('../assets/3d/town.glb');
+useGLTF.preload('/assets/3d/town.glb');

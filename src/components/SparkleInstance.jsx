@@ -5,7 +5,7 @@ function SparkleInstance({ color, size, style }) {
                 width={size}
                 height={size}
                 viewBox="0 0 160 160" fill="none" style={style}>
-                <path d="./assets/images/spark.svgrepo-com" fill={color} />
+                <path d="/assets/images/spark.svgrepo-com" fill={color} />
             </Svg>
         </Wrapper>
     );

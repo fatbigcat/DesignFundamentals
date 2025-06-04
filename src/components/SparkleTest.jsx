@@ -16,7 +16,7 @@ const SparkleTest = () => {
                 }}>
                 <Sparkles>
                     <img
-                        src="src/assets/images/mai-col/town_colorAdjusted.png"
+                        src="/assets/images/mai-col/town_colorAdjusted.png"
                         alt="Top Slide"
                         style={{
                             background: 'none',

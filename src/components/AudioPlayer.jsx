@@ -21,7 +21,7 @@ function AudioPlayer() {
         <div className="audio-player">
             <audio
                 ref={audioRef}
-                src="src/assets/calmContinuous.mp3"
+                src="/assets/calmContinuous.mp3"
                 autoPlay
                 loop
             />
